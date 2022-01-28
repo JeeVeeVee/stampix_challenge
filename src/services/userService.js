@@ -4,8 +4,11 @@ let getAll = async () => {
   return await userRepo.findAllUsers();
 };
 
-let getById;
+let getByFirstName = async (firstname) => {
+  return await userRepo.findByFirstName(firstname);
+};
+
 export let userService = {
   getAll,
-  getById,
+  getByFirstName,
 };
