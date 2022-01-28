@@ -3,6 +3,12 @@ const VALIDATION_FAILED = 'VALIDATION_FAILED';
 const UNAUTHORIZED = 'UNAUTHORIZED';
 const FORBIDDEN = 'FORBIDDEN';
 
+/**
+ * class used to show the user of the api to show what the error was that occured
+ * @param code      geeft aan welke code de error heeft
+ * @param message   bericht dat de user ziet, moet meer info geven over waar of waarom het fout ging
+ * @param details   extra details over de fout
+ */
 class ServiceError extends Error {
   constructor(code, message, details = {}) {
     super(message);

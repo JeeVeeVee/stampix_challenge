@@ -1,5 +1,9 @@
 import { createServer } from './createServer.js';
 
+/**
+ * start de server op, sluit hem af
+ * @returns {Promise<void>}
+ */
 async function main() {
   try {
     console.log('start');

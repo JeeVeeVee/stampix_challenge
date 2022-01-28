@@ -32,8 +32,6 @@ export let buildUserRoute = async (app) => {
   router.get('/', getAllUsers);
   router.post('/', createUser);
   router.get('/:firstname', getByFirstName);
-  //router.put('/:id', validate(updateSnackbarById.schema),updateSnackbarById)
-  //router.delete('/:id', validate(deleteSnackbarForId.schema),deleteSnackbarForId)
 
   app.use(router.routes()).use(router.allowedMethods());
 };

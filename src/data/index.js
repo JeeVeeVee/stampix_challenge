@@ -2,6 +2,10 @@ import knex from 'knex';
 
 let knexInstance;
 
+/**
+ * zorgt ervoor dat de verbinding met de database wordt geinitialiseerd
+ * @returns {Promise<Knex<any, any[]>>} geeft de knexInstance terug die de repositories kunnen gebruiken om data op te halen
+ */
 async function initializeData() {
   const knexOptions = {
     client: 'sqlite3',
@@ -25,11 +29,20 @@ async function initializeData() {
   return knexInstance;
 }
 
+/**
+ * sluit de connectie met de database af
+ * @returns {Promise<void>}
+ */
 async function shutdownData() {
   await knexInstance.destroy();
   knexInstance = null;
 }
 
+/**
+ * functie die de repositories gebruiken om de knexInstance aan te spreken
+ * @returns de knexInstance, als die bestaat
+ * @throws  error indien de knexInstance nog niet is geinitialiseerd (initizalizeData() niet is opgeroepen)
+ */
 function getKnex() {
   if (!knexInstance)
     throw new Error(
@@ -38,6 +51,10 @@ function getKnex() {
   return knexInstance;
 }
 
+/**
+ * alle tables die aanwezig zijn in de database
+ * @type {{user: string}}
+ */
 const tables = {
   user: 'user',
 };

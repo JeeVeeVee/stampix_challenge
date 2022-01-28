@@ -1,10 +1,20 @@
 import { Knex } from '../data/index.js';
 
+
+/**
+ * haalt alle users op uit de database
+ * @returns {Promise<*>} array met daarin alle users
+ */
 const findAllUsers = async () => {
   const output = await Knex.getKnex()(Knex.tables.user).select();
   return output;
 };
 
+/**
+ * haalt alle users op die firstname als voornaam hebben, dit kunnen er meerdere zijn!
+ * @param firstname   naam waarop gezocht moet worden
+ * @returns {Promise<awaited boolean | Knex.QueryBuilder<TRecord, TResult>>}
+ */
 const findByFirstName = async (firstname) => {
   const output = await Knex.getKnex()(Knex.tables.user)
     .select()
@@ -12,6 +22,18 @@ const findByFirstName = async (firstname) => {
   return output;
 };
 
+/**
+ * creeert een nieuwe user, en voegt die toe aan de database, genereert de velden created_at en modified_at
+ * @param gender
+ * @param firstname
+ * @param lastname
+ * @param email
+ * @param phone_number
+ * @param date_of_birth
+ * @param language
+ * @returns {Promise<awaited boolean | Knex.QueryBuilder<TRecord, TResult>>}
+ * @throws error als er al een user met hetzelfde emailadress in de database zit
+ */
 const create = async (
   gender,
   firstname,

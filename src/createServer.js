@@ -9,11 +9,16 @@ const CORS_ORIGINS = ['http://localhost:3000'];
 const CORS_MAX_AGE = 3 * 60 * 60;
 const PORT = 3000;
 
+/**
+ * creeert een nieuwe instantie van de server
+ * @returns {Promise<unknown>}
+ */
 export let createServer = async function createServer() {
   await Knex.initializeData();
 
   const app = new Koa();
   app.use(
+    //toevoegen van CORS
     koaCors({
       origin: (ctx) => {
         if (CORS_ORIGINS.indexOf(ctx.request.header.origin.toString()) !== -1) {
@@ -30,7 +35,6 @@ export let createServer = async function createServer() {
   app.use(async (ctx, next) => {
     try {
       await next();
-
       if (ctx.status === 404) {
         ctx.body = {
           code: 'NOT_FOUND',
@@ -70,7 +74,7 @@ export let createServer = async function createServer() {
       ctx.body = errorBody;
     }
   });
-
+  //bouwen van alle endpoints
   await installRest(app);
 
   return {
@@ -88,8 +92,8 @@ export let createServer = async function createServer() {
 
     async stop() {
       {
-        //app.removeAllListeners();
-        //await shutdownData();
+        app.removeAllListeners();
+        await Knex.shutdownData();
       }
     },
   };
