@@ -2,7 +2,6 @@ import Router from '@koa/router';
 import { buildUserRoute } from './_user.js';
 
 export let installRest = async (app) => {
-
   const router = new Router({
     prefix: '',
   });
