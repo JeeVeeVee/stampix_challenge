@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "tsc --watch",
-    "start": "serverless offline",
+    "start": "nodemon src/index.js",
     "lint": "lint-staged"
   },
   "repository": {
@@ -44,6 +44,7 @@
       "@commitlint/config-conventional"
     ]
   },
+  "type": "module",
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
     "extends": [
@@ -75,5 +76,12 @@
       "eslint",
       "tsc --noEmit"
     ]
+  },
+  "dependencies": {
+    "@koa/cors": "^3.1.0",
+    "@koa/router": "^10.1.1",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "nodemon": "^2.0.15"
   }
 }
