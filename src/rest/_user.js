@@ -1,8 +1,14 @@
-module.exports = async (app) => {
+import Router from '@koa/router';
+
+const getAllUsers = async (ctx) => {
+  ctx.body = 'users';
+};
+
+export let buildUserRoute = async (app) => {
   const router = new Router({
     prefix: '/user',
   });
-  router.get('/', getAll);
+  router.get('/', getAllUsers);
   //router.post('/',validate(createResto.schema) , createResto)
   //router.get('/:snackbar_id', getById);//validate(getById.schema),getById);
   //router.put('/:id', validate(updateSnackbarById.schema),updateSnackbarById)

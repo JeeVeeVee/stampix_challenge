@@ -1,9 +1,12 @@
-const sqlite3 = require('sqlite3');
-const path = require('path');
-const fs = require('fs');
-const faker = require('faker');
+import sqlite3 from 'sqlite3';
 
-const dbFile = path.join(__dirname, '../src/db.sqlite');
+import path from 'path';
+
+import fs from 'fs';
+
+import faker from 'faker';
+
+const dbFile = path.join('../src/db.sqlite');
 if (fs.existsSync(dbFile)) {
   fs.unlinkSync(dbFile);
 }
@@ -16,7 +19,7 @@ db.serialize(() => {
     gender text not null,
     first_name text not null,
     last_name text not null,
-    email text not null,
+    email text not null PRIMARY KEY,
     phone_number text null,
     date_of_birth text not null,
     language text default 'en' not null,

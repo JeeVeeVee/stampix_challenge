@@ -1,16 +1,16 @@
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import { installRest } from './rest/index.js';
-//import { initializeData } from './data';
+import { Knex } from './data/index.js';
 import koaCors from '@koa/cors';
 import { serviceError } from './core/serviceError.js';
 
 const CORS_ORIGINS = ['http://localhost:3000'];
 const CORS_MAX_AGE = 3 * 60 * 60;
-const PORT = 9000;
+const PORT = 3000;
 
 export let createServer = async function createServer() {
-  //await initializeData();
+  await Knex.initializeData();
 
   const app = new Koa();
   app.use(
@@ -81,16 +81,15 @@ export let createServer = async function createServer() {
     start() {
       return new Promise((resolve) => {
         app.listen(PORT);
-        console.info(`🚀 Server listening on http://localhost:9000`);
+        console.info(`🚀 Server listening on http://localhost:` + PORT);
         resolve();
       });
     },
 
     async stop() {
       {
-        app.removeAllListeners();
-        await shutdownData();
-        getLogger().info('Goodbye');
+        //app.removeAllListeners();
+        //await shutdownData();
       }
     },
   };
