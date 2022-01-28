@@ -43,9 +43,13 @@ Overall, how much time did you spent (approximately) on this challenge?
 
 ### Your answers
 
-<!--
-Write down your answers here
--->
+I would work with an offset and limit, that way all 10000 users are only fetched if the client wants/needs to. I would also consider to fetch fewer fields as not all applications need all the fields that are being fetched at the moment.
+
+I used the Knex framework in my solution, which allows for seeds, these files have the same functionality as the populate script, but is database-independent as the framework is compatible with a lot of databases. So I only would have to change the knexOptions in data/index.js, and I would be able to use the same seed.
+
+I would change the query so that it scans over more then 1 field. It may be interesting to order the resultset based on relevancy
+
+I worked on this challenge for about 4 hours. There is however a little bug that prohibits me from importing any packages in my tests, so they don't run. The hardest part was getting used to all the conventions of the linter and the setup of the project (commiting, getting to know the database, ...)
 
 ## Delivery
 - Anything that is not enforced in the base repository (tools, dependencies, architecture, frameworks, ...) is free of choice
