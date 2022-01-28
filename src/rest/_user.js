@@ -1,7 +1,8 @@
 import Router from '@koa/router';
+import { userService } from '../services/userService.js';
 
 const getAllUsers = async (ctx) => {
-  ctx.body = 'users';
+  ctx.body = await userService.getAll();
 };
 
 export let buildUserRoute = async (app) => {

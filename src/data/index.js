@@ -6,7 +6,7 @@ async function initializeData() {
   const knexOptions = {
     client: 'sqlite3',
     connection: {
-      filename: '../db.sqlite',
+      filename: 'src/db.sqlite',
     },
   };
   knexInstance = knex(knexOptions);
@@ -17,6 +17,7 @@ async function initializeData() {
     knexOptions.connection.database = 'user';
     knexInstance = knex(knexOptions);
     await knexInstance.raw('SELECT 1+1 AS result');
+    console.log('database-connection established');
   } catch (error) {
     console.error('something went wrong');
     throw new Error('Could not initialize the data layer');
@@ -38,7 +39,7 @@ function getKnex() {
 }
 
 const tables = {
-  user: 'users',
+  user: 'user',
 };
 
 export const Knex = {
