@@ -1,6 +1,7 @@
 import Router from '@koa/router';
 import { userService } from '../services/userService.js';
 import Joi from 'joi';
+import { validator } from './_validation.js';
 
 const getAllUsers = async (ctx) => {
   ctx.body = await userService.getAll();
@@ -19,7 +20,7 @@ createUser.schema = {
     first_name: Joi.string(),
     last_name: Joi.string(),
     email: Joi.string(),
-    phoneFormats: Joi.string(),
+    phone_number: Joi.string(),
     date_of_birth: Joi.string(),
     language: Joi.string(),
   },
@@ -30,7 +31,7 @@ export let buildUserRoute = async (app) => {
     prefix: '/user',
   });
   router.get('/', getAllUsers);
-  router.post('/', createUser);
+  router.post('/', validator(createUser.schema), createUser);
   router.get('/:firstname', getByFirstName);
 
   app.use(router.routes()).use(router.allowedMethods());
